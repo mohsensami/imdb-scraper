@@ -3,12 +3,14 @@ import Home from './pages/Home.vue'
 import BoxOffice from './pages/BoxOffice.vue'
 import Top250 from './pages/Top250.vue'
 import BoxOfficeAllTime from './pages/BoxOfficeAllTime.vue'
+import Single from './pages/Single.vue'
 
 const routes = [
     { path: '/', name:'home', component: Home },
     { path: '/boxoffice', name:'boxoffice', component: BoxOffice },
     { path: '/top250', name:'top250', component: Top250 },
     { path: '/boxofficeall', name:'boxofficeall', component: BoxOfficeAllTime },
+    { path: '/title/:id', name: 'single', component: Single },
     // { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
 ]
 

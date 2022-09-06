@@ -39,7 +39,7 @@
           class="font-medium text-base md:text-sm text-gray-800 line-clamp-1"
           :title="item.title"
         >
-          <router-link class="nav-link" to="/">{{ item.title }}</router-link>
+          <router-link class="nav-link" :to="{name: 'single', params: { id: item.id } }">{{ item.title }}</router-link>
         </h2>
 
         <div class="">
