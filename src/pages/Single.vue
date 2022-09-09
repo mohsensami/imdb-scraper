@@ -29,9 +29,19 @@
         </div>
         <div class="col-span-8">
             <div>
-                <iframe :src="item.trailer.linkEmbed" frameborder="0" width="100%" height="500"></iframe>
+              <iframe width="100%" height="450" :src="item.trailer.linkEmbed" frameborder="0" allowfullscreen></iframe>
+                <!-- <iframe :src="item.trailer.linkEmbed" frameborder="0" width="100%" height="500"></iframe> -->
             </div>
             <h2 class="text-2xl font-bold my-2">{{item.fullTitle}}</h2>
+            <div>
+              <ul class="flex gap-8">
+                <li>IMDB<Icon icon="la:imdb" color="#ffc107" width="45" />{{ item.ratings.imDb }}</li>
+                <li>metacritic<Icon icon="emojione:film-frames" color="#ffc107" width="45" />{{ item.ratings.metacritic }}</li>
+                <li>theMovieDb<Icon icon="fontisto:film" color="#ffc107" width="45" />{{ item.ratings.theMovieDb }}</li>
+                <li>rottenTomatoes<Icon icon="simple-icons:rottentomatoes" color="#ffc107" width="45" />{{ item.ratings.rottenTomatoes }}</li>
+                <li>filmAffinity<Icon icon="fluent-emoji-high-contrast:film-projector" color="#ffc107" width="45" />{{ item.ratings.filmAffinity }}</li>
+              </ul>
+            </div>
             <div class="mt-4">
                 <ul class="flex gap-4">
                     <li class="px-2 bg-gray-300 rounded-lg" v-for="(genre, index) in item.genreList" :key="index"><small>{{ genre.value }}</small></li>
@@ -43,7 +53,7 @@
         <div class="col-span-8">
             <ul class="grid grid-cols-2 justify-between">
                 <li class=" mb-4" v-for="(actor, index) in item.actorList.slice(0, 10)" :key="index">
-                    <div><img width="200" height="200" class="rounded-full mt-4" :src="actor.image" :alt="actor.name"></div>
+                    <div><img class="rounded-full mt-4 w-[200px] h-[200px]" :src="actor.image" :alt="actor.name"></div>
                     <h3>{{ actor.name }}</h3>
                     <p class="text-gray-400">{{ actor.asCharacter }}</p>
                 </li>
@@ -83,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-    
+    import { Icon } from '@iconify/vue';
     import { ref } from "@vue/reactivity";
     import axios from "axios";
     const item:any = ref([]);
@@ -107,6 +117,9 @@
 
     
 
-<style>
+<style scoped>
+.video-player-frame {
+  width: 100% !important;
+}
 
 </style>
