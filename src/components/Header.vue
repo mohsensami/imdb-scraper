@@ -37,13 +37,13 @@
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <router-link :to="{name: 'home'}" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</router-link>
+            <router-link :to="{name: 'home'}" class="menu-item" aria-current="page">Home</router-link>
 
-            <router-link :to="{name: 'boxoffice'}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">boxoffice</router-link>
+            <router-link :to="{name: 'boxoffice'}" class="menu-item">boxoffice</router-link>
 
-            <router-link :to="{name: 'top250'}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">top250</router-link>
+            <router-link :to="{name: 'top250'}" class="menu-item">top250</router-link>
 
-            <router-link :to="{name: 'boxofficeall'}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">boxoffice all</router-link>
+            <router-link :to="{name: 'boxofficeall'}" class="menu-item">boxoffice all</router-link>
           </div>
         </div>
       </div>

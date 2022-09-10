@@ -23,16 +23,23 @@
       </svg>
       <span class="sr-only">Loading...</span>
     </div>
-    <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-4">
-            <img :src="item.image" :alt="item.title">
+    <div class="grid grid-cols-12 gap-8">
+        <div class="col-span-3">
+            <aside class="h-screen sticky top-2">
+              <h1 class="text-xl font-bold my-2">{{item.fullTitle}}</h1>
+              <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=400x600&url=`+item.image" :alt="item.title">
+            </aside>
         </div>
-        <div class="col-span-8">
+        <div class="col-span-9">
+            <div class="mt-4">
+              <ul class="flex gap-4">
+                  <li class="px-2 bg-gray-300 rounded-lg" v-for="(genre, index) in item.genreList" :key="index"><small>{{ genre.value }}</small></li>
+              </ul>
+            </div>
             <div>
-              <iframe width="100%" height="450" :src="item.trailer.linkEmbed" frameborder="0" allowfullscreen></iframe>
+              <iframe :src="item.trailer.linkEmbed" frameborder="0" width="1008" height="500"></iframe>
                 <!-- <iframe :src="item.trailer.linkEmbed" frameborder="0" width="100%" height="500"></iframe> -->
             </div>
-            <h2 class="text-2xl font-bold my-2">{{item.fullTitle}}</h2>
             <div>
               <ul class="flex gap-8">
                 <li>IMDB<Icon icon="la:imdb" color="#ffc107" width="45" />{{ item.ratings.imDb }}</li>
@@ -42,50 +49,46 @@
                 <li>filmAffinity<Icon icon="fluent-emoji-high-contrast:film-projector" color="#ffc107" width="45" />{{ item.ratings.filmAffinity }}</li>
               </ul>
             </div>
-            <div class="mt-4">
-                <ul class="flex gap-4">
-                    <li class="px-2 bg-gray-300 rounded-lg" v-for="(genre, index) in item.genreList" :key="index"><small>{{ genre.value }}</small></li>
+            
+            <div class="grid grid-cols-12">
+              <div class="col-span-8">
+                <ul class="grid grid-cols-2 justify-between">
+                  <li class=" mb-4" v-for="(actor, index) in item.actorList.slice(0, 10)" :key="index">
+                      <div><img class="rounded-full mt-4 w-[150px] h-[150px]" :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=150x150&url=`+actor.image" :alt="actor.name"></div>
+                      <h3>{{ actor.name }}</h3>
+                      <p class="text-gray-400">{{ actor.asCharacter }}</p>
+                  </li>
                 </ul>
+              </div>
+              <div class="col-span-4">
+                <ul class="bg-blue-50 p-4 sticky h-screen top-2">
+                  <li>
+                    <h4>Director:</h4>
+                    <p>{{ item.directorList[0].name }}</p>
+                  </li>
+                  <li>
+                    <h4>writers:</h4>
+                    <p>{{ item.writers }}</p>
+                  </li>
+                  <li>
+                    <h4>stars:</h4>
+                    <p>{{ item.stars }}</p>
+                  </li>
+                  <li>
+                    <h4>Genres:</h4>
+                    <p>{{ item.genres }}</p>
+                  </li>
+                  <li>
+                    <h4>Release Date:</h4>
+                    <p>{{ item.releaseDate }}</p>
+                  </li>
+                  <li>
+                    <h4>Run Time:</h4>
+                    <p>{{ item.runtimeStr }}</p>
+                  </li>
+                </ul>
+              </div>
             </div>
-        </div>
-    </div>
-    <div class="grid grid-cols-12">
-        <div class="col-span-8">
-            <ul class="grid grid-cols-2 justify-between">
-                <li class=" mb-4" v-for="(actor, index) in item.actorList.slice(0, 10)" :key="index">
-                    <div><img class="rounded-full mt-4 w-[200px] h-[200px]" :src="actor.image" :alt="actor.name"></div>
-                    <h3>{{ actor.name }}</h3>
-                    <p class="text-gray-400">{{ actor.asCharacter }}</p>
-                </li>
-            </ul>
-        </div>
-        <div class="col-span-4 bg-blue-50 p-4">
-            <ul>
-            <li>
-              <h4>Director:</h4>
-              <p>{{ item.directorList[0].name }}</p>
-            </li>
-            <li>
-              <h4>writers:</h4>
-              <p>{{ item.writers }}</p>
-            </li>
-            <li>
-              <h4>stars:</h4>
-              <p>{{ item.stars }}</p>
-            </li>
-            <li>
-              <h4>Genres:</h4>
-              <p>{{ item.genres }}</p>
-            </li>
-            <li>
-              <h4>Release Date:</h4>
-              <p>{{ item.releaseDate }}</p>
-            </li>
-            <li>
-              <h4>Run Time:</h4>
-              <p>{{ item.runtimeStr }}</p>
-            </li>
-          </ul>
         </div>
     </div>
 
@@ -96,12 +99,15 @@
     import { Icon } from '@iconify/vue';
     import { ref } from "@vue/reactivity";
     import axios from "axios";
+    import { useRoute } from "vue-router";
     const item:any = ref([]);
     const loading = ref(true);
+    const route = useRoute();
+    
     function getSingle() {
       axios
         .get(
-          `https://raw.githubusercontent.com/mrmohsensami/api/main/single.json`
+          `https://imdb-api.com/en/API/Title/k_lc0zmc7m/${route.params.id}/FullActor,FullCast,Posters,Images,Trailer,Ratings,Wikipedia`
         )
         .then(function (response) {
           item.value = response.data;
