@@ -27,7 +27,7 @@
         <div class="col-span-3">
             <aside class="h-screen sticky top-2">
               <h1 class="text-xl font-bold my-2">{{item.fullTitle}}</h1>
-              <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=400x600&url=`+item.image" :alt="item.title">
+              <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_g6l7enfv&size=400x600&url=`+item.image" :alt="item.title">
             </aside>
         </div>
         <div class="col-span-9">
@@ -54,8 +54,8 @@
               <div class="col-span-8">
                 <ul class="grid grid-cols-2 justify-between">
                   <li class=" mb-4" v-for="(actor, index) in item.actorList.slice(0, 10)" :key="index">
-                      <div><img class="rounded-full mt-4 w-[150px] h-[150px]" :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=150x150&url=`+actor.image" :alt="actor.name"></div>
-                      <h3>{{ actor.name }}</h3>
+                      <div><img class="rounded-full mt-4 w-[150px] h-[150px]" :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_g6l7enfv&size=150x150&url=`+actor.image" :alt="actor.name"></div>
+                      <h3><router-link :to="{name: 'actor', params:{id: actor.id}}">{{ actor.name }}</router-link></h3>
                       <p class="text-gray-400">{{ actor.asCharacter }}</p>
                   </li>
                 </ul>
@@ -107,7 +107,7 @@
     function getSingle() {
       axios
         .get(
-          `https://imdb-api.com/en/API/Title/k_lc0zmc7m/${route.params.id}/FullActor,FullCast,Posters,Images,Trailer,Ratings,Wikipedia`
+          `https://imdb-api.com/en/API/Title/k_g6l7enfv/${route.params.id}/FullActor,FullCast,Posters,Images,Trailer,Ratings,Wikipedia`
         )
         .then(function (response) {
           item.value = response.data;
@@ -119,7 +119,7 @@
     }
     getSingle();
     
-    </script>
+</script>
 
     
 
