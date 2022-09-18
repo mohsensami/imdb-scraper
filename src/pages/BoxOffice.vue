@@ -33,8 +33,8 @@
         :key="index"
         class="bg-blue-50 border border-blue-100 rounded-md flex flex-col gap-2 justify-center px-5 py-4"
       >
-        <!-- <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=250x350&url=`+item.image" /> -->
-        <img :src="item.image" />
+        <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=250x350&url=`+item.image" />
+        <!-- <img :src="item.image" /> -->
         <h2
           class="font-medium text-base md:text-sm text-gray-800 line-clamp-1"
           :title="item.title"
@@ -60,10 +60,10 @@ const items: any = ref([]);
 const loading = ref(true);
 function get250List() {
   axios
-    // .get('https://imdb-api.com/en/API/BoxOffice/k_lc0zmc7m')
-    .get(
-      "https://raw.githubusercontent.com/mrmohsensami/api/main/boxoffice.json"
-    )
+    .get('https://imdb-api.com/en/API/BoxOffice/k_lc0zmc7m')
+    // .get(
+    //   "https://raw.githubusercontent.com/mrmohsensami/api/main/boxoffice.json"
+    // )
     .then(function (response) {
       items.value = response.data.items;
       loading.value = false;

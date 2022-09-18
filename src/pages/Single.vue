@@ -27,7 +27,7 @@
         <div class="col-span-3">
             <aside class="h-screen sticky top-2">
               <h1 class="text-xl font-bold my-2">{{item.fullTitle}}</h1>
-              <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_g6l7enfv&size=400x600&url=`+item.image" :alt="item.title">
+              <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=400x600&url=`+item.image" :alt="item.title">
             </aside>
         </div>
         <div class="col-span-9">
@@ -54,7 +54,7 @@
               <div class="col-span-8">
                 <ul class="grid grid-cols-2 justify-between">
                   <li class=" mb-4" v-for="(actor, index) in item.actorList.slice(0, 10)" :key="index">
-                      <div><img class="rounded-full mt-4 w-[150px] h-[150px]" :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_g6l7enfv&size=150x150&url=`+actor.image" :alt="actor.name"></div>
+                      <div><img class="rounded-full mt-4 w-[150px] h-[150px]" :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=150x150&url=`+actor.image" :alt="actor.name"></div>
                       <h3><router-link :to="{name: 'actor', params:{id: actor.id}}">{{ actor.name }}</router-link></h3>
                       <p class="text-gray-400">{{ actor.asCharacter }}</p>
                   </li>
@@ -107,7 +107,7 @@
         <ul class="md:grid md:grid-cols-6 grid-cols-2 gap-4">
             <li v-for="(similar, index) in item.similars" :key="index" class="bg-blue-50 border border-blue-100 rounded-md flex flex-col gap-2 justify-center px-5 py-4">
                 <router-link :to="{name: 'single', params:{id:similar.id}}">{{ similar.title }}</router-link>
-                <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_g6l7enfv&size=250x400&url=`+similar.image" :alt="similar.title">
+                <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=250x400&url=`+similar.image" :alt="similar.title">
                 <div class="">
                   <small>IMDb Rating: {{ similar.imDbRating }}</small>
                 </div>
@@ -117,7 +117,7 @@
 
 
     <div>
-      <swiper
+  <!-- <swiper
     :slidesPerView="'auto'"
     :spaceBetween="30"
     :pagination="{
@@ -126,8 +126,27 @@
     :modules="modules"
     class="mySwiper"
   >
-    <swiper-slide v-for="(img, index) in item.images.items" :key="index"><img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_g6l7enfv&size=400x600&url=`+img.image" ></swiper-slide>
+    <swiper-slide v-for="(img, index) in item.images.items" :key="index"><img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=400x600&url=`+img.image" ></swiper-slide>
+  </swiper> -->
+
+
+  <swiper
+    :slidesPerView="3"
+    :spaceBetween="30"
+    :slidesPerGroup="3"
+    :loop="true"
+    :loopFillGroupWithBlank="true"
+    :pagination="{
+      clickable: true,
+    }"
+    :navigation="true"
+    :modules="modules"
+    class="mySwiper"
+  >
+    <swiper-slide v-for="(img, index) in item.images.items" :key="index"><img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=400x600&url=`+img.image">Slide 1</swiper-slide>
   </swiper>
+
+
     </div>
 
 
@@ -141,9 +160,12 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ref, defineComponent } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
-
+import { Pagination, Navigation } from "swiper";
 // Import Swiper styles
 import 'swiper/css';
+
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 export default {
   components: {
@@ -164,7 +186,7 @@ const route = useRoute();
 function getSingle() {
     axios
       .get(
-        `https://imdb-api.com/en/API/Title/k_g6l7enfv/${route.params.id}/FullActor,FullCast,Posters,Images,Trailer,Ratings,Wikipedia`
+        `https://imdb-api.com/en/API/Title/k_lc0zmc7m/${route.params.id}/FullActor,FullCast,Posters,Images,Trailer,Ratings,Wikipedia`
       )
       .then(function (response) {
         item.value = response.data;
@@ -178,9 +200,7 @@ function getSingle() {
 
 
     return {
-      onSwiper,
-      onSlideChange,
-      getSingle,
+      modules: [Pagination, Navigation],
       item
     };
   },
