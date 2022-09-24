@@ -24,7 +24,7 @@
       <span class="sr-only">Loading...</span>
     </div>
   <div v-else class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
-    <div  v-for="(item, index) in items" :key="index" class="bg-blue-50 border border-blue-100 rounded-md flex flex-col gap-2 justify-center px-5 py-4">
+    <div  v-for="(item, index) in items" :key="index" class="bg-white bg-opacity-30 rounded-lg border shadow-md flex flex-col gap-2 justify-center px-5 py-4">
 
 
       <!-- <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=250x350&url=`+item.image" /> -->

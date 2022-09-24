@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-blue-50 border-t-2 border-blue-100 mt-8 shadow md:py-8 dark:bg-gray-900">
+  <footer class="bg-cyan-900 text-white border-t-2 border-blue-100 mt-8 shadow md:py-8 dark:bg-gray-900">
     <div class="container sm:flex sm:items-center sm:justify-between">
         <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">
             <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-8" alt="Flowbite Logo" />

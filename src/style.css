@@ -12,3 +12,8 @@
     }
 }
 @tailwind utilities;
+
+
+.router-link-active {
+  @apply bg-gray-700 text-white;
+}

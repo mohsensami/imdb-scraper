@@ -61,7 +61,7 @@
                 </ul>
               </div>
               <div class="col-span-4">
-                <ul class="bg-blue-50 p-4 sticky h-screen top-2">
+                <ul class="bg-white bg-opacity-30 rounded-lg border shadow-md p-4 sticky h-screen top-2">
                   <li>
                     <h4>Director:</h4>
                     <p>{{ item.directorList[0].name }}</p>
@@ -96,40 +96,14 @@
                     <h4>Run Time:</h4>
                     <p>{{ item.runtimeStr }}</p>
                   </li>
+                  <li><router-link :to="{name: 'awards', params:{id: item.id}}">Awards</router-link></li>
                 </ul>
               </div>
             </div>
         </div>
     </div>
 
-    <div class=" mt-8">
-        <h4 class="text-2xl mb-2">Similars</h4>
-        <ul class="md:grid md:grid-cols-6 grid-cols-2 gap-4">
-            <li v-for="(similar, index) in item.similars" :key="index" class="bg-blue-50 border border-blue-100 rounded-md flex flex-col gap-2 justify-center px-5 py-4">
-                <router-link :to="{name: 'single', params:{id:similar.id}}">{{ similar.title }}</router-link>
-                <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=250x400&url=`+similar.image" :alt="similar.title">
-                <div class="">
-                  <small>IMDb Rating: {{ similar.imDbRating }}</small>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-
-    <div>
-  <!-- <swiper
-    :slidesPerView="'auto'"
-    :spaceBetween="30"
-    :pagination="{
-      clickable: true,
-    }"
-    :modules="modules"
-    class="mySwiper"
-  >
-    <swiper-slide v-for="(img, index) in item.images.items" :key="index"><img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=400x600&url=`+img.image" ></swiper-slide>
-  </swiper> -->
-
-
+<div class="mt-8">
   <swiper
     :slidesPerView="3"
     :spaceBetween="30"
@@ -145,9 +119,23 @@
   >
     <swiper-slide v-for="(img, index) in item.images.items" :key="index"><img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=400x600&url=`+img.image">Slide 1</swiper-slide>
   </swiper>
+</div>
 
-
+    <div class=" mt-8">
+        <h4 class="text-2xl mb-2">Similars</h4>
+        <ul class="md:grid md:grid-cols-6 grid-cols-2 gap-4">
+            <li v-for="(similar, index) in item.similars" :key="index" class="bg-white bg-opacity-30 rounded-lg border shadow-md flex flex-col gap-2 justify-center px-5 py-4">
+                <router-link :to="{name: 'single', params:{id:similar.id}}">{{ similar.title }}</router-link>
+                <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=250x400&url=`+similar.image" :alt="similar.title">
+                <div class="">
+                  <small>IMDb Rating: {{ similar.imDbRating }}</small>
+                </div>
+            </li>
+        </ul>
     </div>
+
+
+
 
 
   </div>

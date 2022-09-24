@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-[url('./public/img/bg.jpg')] bg-no-repeat bg-cover">
     <Header />
     <router-view></router-view>
     <Footer />
@@ -12,5 +12,6 @@ import Footer from "./components/Footer.vue";
 
 </script>
 
-<style scoped>
+<style>
+
 </style>
