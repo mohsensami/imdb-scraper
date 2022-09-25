@@ -27,8 +27,7 @@
     <div  v-for="(item, index) in items" :key="index" class="bg-white bg-opacity-30 rounded-lg border shadow-md flex flex-col gap-2 justify-center px-5 py-4">
 
 
-      <!-- <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_lc0zmc7m&size=250x350&url=`+item.image" /> -->
-      <img :src="item.image" />
+      <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_g6l7enfv&size=250x350&url=`+item.image" />
       <h2 class="font-medium text-base md:text-sm text-gray-800 line-clamp-1" :title="item.title">
 
 <router-link class="nav-link" :to="{name: 'single', params: { id: item.id } }" >{{ item.title }}</router-link>
@@ -66,8 +65,7 @@ const items: any = ref([]);
 const loading = ref(true);
 function get250List() {
   axios
-    // .get('https://imdb-api.com/en/API/BoxOffice/k_lc0zmc7m')
-    .get('https://raw.githubusercontent.com/mrmohsensami/api/main/top250.json')
+    .get('https://imdb-api.com/en/API/Top250Movies/k_g6l7enfv')
     .then(function (response) {
       items.value = response.data.items;
       loading.value = false;

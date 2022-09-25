@@ -15,7 +15,7 @@
     </div>
     <div>
         <ul class="md:flex justify-between gap-8">
-            <li v-for="(known, index) in item.knownFor" :key="index" class="bg-blue-50 border border-blue-100 rounded-md flex flex-col gap-2 justify-center my-8 px-5 py-4">
+            <li v-for="(known, index) in item.knownFor" :key="index" class="bg-white bg-opacity-30 rounded-lg border shadow-md flex flex-col gap-2 justify-center my-8 px-5 py-4">
                 <router-link :to="{name: 'single', params:{id:known.id}}">{{ known.title }}</router-link>
                 <img :src="`https://imdb-api.com/API/ResizeImage?apiKey=k_g6l7enfv&size=250x400&url=`+known.image" :alt="known.title">
                 <div class="flex justify-between">
