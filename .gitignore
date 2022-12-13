@@ -22,3 +22,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# Backend
+.vscode/
+venv/
+env/
+.venv/
+.env/
+.idea/
+
+**/__pycache__/
+*.pyc
+
+# local_settings.py
+.DS_Store
