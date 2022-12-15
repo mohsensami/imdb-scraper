@@ -10,48 +10,17 @@ def top250Movies(request):
     url = 'https://www.imdb.com/chart/boxoffice'
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'html.parser')
-    data= {}
-    title = soup.find('h1').text
-    # sub_title = soup.find('h4').text
-    data['title'] = title
-    # data['sub_title'] = sub_title
 
     table = soup.find('table')
     rows = table.find_all('tr')
+    data = []
     for row in rows:
         for item in row.find_all('td', {'class':'titleColumn'}):
-            Movie(
+            obj, created = Movie.objects.get_or_create(
                 title = item.text,
-                slug = slugify(title)
-            ).save()
-            # print(head.text)
-
-
-    # rows = table.find('tr')
-    # for row in rows:
-    #     for head in row.find_all('th'):
-    #         heads = head.text
-    #         data.append(heads)
-        # for body in row.find_all('td'):
-        #     bodies = body.text
-        #     data.append(bodies)
+                slug = slugify(item.text)
+            )
+            data.append(obj)
+            # print(obj)
     context = {'result': data}
     return render(request, 'base.html', context)
-
-
-
-# def top250Movies(request):
-#     url = 'https://imdb-api.com/box-office'
-#     page = requests.get(url)
-#     soup = BeautifulSoup(page.text, 'html.parser')
-    
-#     table = soup.find('table')
-#     table_body = table.find('tbody')
-
-#     rows = table_body.find_all('tr')
-#     data = []
-#     for row in rows:
-#         bodies = row.text
-#         data.append(bodies)
-#     context = {'result': data}
-#     return render(request, 'base.html', context)
