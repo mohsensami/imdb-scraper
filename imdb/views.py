@@ -15,12 +15,12 @@ def top250Movies(request):
     rows = table.find_all('tr')
     data = []
     for row in rows:
-        for item in row.find_all('td', {'class':'titleColumn'}):
-            obj, created = Movie.objects.get_or_create(
-                title = item.text,
-                slug = slugify(item.text)
-            )
-            data.append(obj)
-            # print(obj)
+        for item in row.find_all('td'):
+            print(item.find('td', {'class':'titleColumn'}))
+            # obj, created = Movie.objects.get_or_create(
+            #     title = item.select_one('.titleColumn').text,
+            #     slug = slugify(item.select_one('.titleColumn').text)
+            # )
+            # data.append(obj)
     context = {'result': data}
     return render(request, 'base.html', context)
