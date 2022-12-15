@@ -16,10 +16,15 @@ def top250Movies(request):
     data = []
     for row in rows:
         for item in row.find_all('td'):
-            print(item.find('td', {'class':'titleColumn'}))
+            for d in item.find_all('td'):
+                print(d.find('td', {'class':'weeksColumn'}))
             # obj, created = Movie.objects.get_or_create(
+            #     image = item.select_one('.posterColumn')['src'],
             #     title = item.select_one('.titleColumn').text,
-            #     slug = slugify(item.select_one('.titleColumn').text)
+            #     slug = slugify(item.select_one('.titleColumn').text),
+            #     weekend = item.select_one('.ratingColumn').text,
+            #     gross = item.select_one('.ratingColumn.secondaryInfo').text,
+            #     weeks = item.select_one('.weeksColumn').text,
             # )
             # data.append(obj)
     context = {'result': data}
