@@ -5,16 +5,19 @@ from bs4 import BeautifulSoup
 
 
 def top250Movies(request):
-    url = 'https://imdb-api.com/box-office'
+    url = 'http://imdb-api.com/box-office/'
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'html.parser')
-    table = soup.find('thead')
-    rows = table.find('tr')
-    for row in rows:
-        data = []
-        for head in row.find_all('th'):
-            heads = head.text
-            data.append(heads)
+    data= {}
+    title = soup.find('h1').text
+    sub_title = soup.find('h4').text
+    data['title'] = title
+    data['sub_title'] = sub_title
+    # rows = table.find('tr')
+    # for row in rows:
+    #     for head in row.find_all('th'):
+    #         heads = head.text
+    #         data.append(heads)
         # for body in row.find_all('td'):
         #     bodies = body.text
         #     data.append(bodies)
