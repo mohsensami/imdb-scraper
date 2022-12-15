@@ -1,18 +1,30 @@
 from django.shortcuts import render
+from .models import Movie
 
 import requests
 from bs4 import BeautifulSoup
 
 
 def top250Movies(request):
-    url = 'http://imdb-api.com/box-office/'
+    url = 'https://www.imdb.com/chart/boxoffice'
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'html.parser')
     data= {}
     title = soup.find('h1').text
-    sub_title = soup.find('h4').text
+    # sub_title = soup.find('h4').text
     data['title'] = title
-    data['sub_title'] = sub_title
+    # data['sub_title'] = sub_title
+
+    table = soup.find('table')
+    rows = table.find_all('tr')
+    for row in rows:
+        for head in row.find_all('td', {'class':'titleColumn'}):
+            Movie(
+                tite = head.text
+            ).save()
+            # print(head.text)
+
+
     # rows = table.find('tr')
     # for row in rows:
     #     for head in row.find_all('th'):

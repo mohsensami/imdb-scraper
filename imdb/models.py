@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+
+class Movie(models.Model):
+    tite = models.CharField(max_length=200)
