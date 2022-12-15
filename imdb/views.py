@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Movie
+from django.utils.text import slugify
 
 import requests
 from bs4 import BeautifulSoup
@@ -18,9 +19,10 @@ def top250Movies(request):
     table = soup.find('table')
     rows = table.find_all('tr')
     for row in rows:
-        for head in row.find_all('td', {'class':'titleColumn'}):
+        for item in row.find_all('td', {'class':'titleColumn'}):
             Movie(
-                tite = head.text
+                title = item.text,
+                slug = slugify(title)
             ).save()
             # print(head.text)
 
