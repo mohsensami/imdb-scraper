@@ -24,5 +24,5 @@
 open this link on your browser `http://127.0.0.1:8000/`
 
 * To Access Admin Page goto `http://127.0.0.1:8000/admin` and enter `username` and `password` of your superuser
-### 5. See Demo here
-`https://imdb.pythonanywhere.com`
+<!-- ### 5. See Demo here
+`https://imdb.pythonanywhere.com` -->

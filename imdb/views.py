@@ -6,7 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def top250Movies(request):
+def boxOfficeMovies(request):
     url = 'http://www.imdb.com/chart/boxoffice'
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'html.parser')
@@ -19,11 +19,16 @@ def top250Movies(request):
             image = row.find('td', {'class':'posterColumn'}).find('img')['src'].replace('\n', ''),
             title = row.find('td', {'class':'titleColumn'}).text.replace('\n', ''),
             slug = slugify(row.find('td', {'class':'titleColumn'}).text.replace('\n', '')),
-            weekend = row.find('td', {'class':'ratingColumn'}).text.replace('\n', ''),
-            gross = row.find('td', {'class':'ratingColumn'}).text.replace('\n', ''),
+            weekend = row.find('td', {'class':'ratingColumn'}).text.replace('\n', '').strip(),
+            gross = row.find('td', {'class':'ratingColumn'}).text.replace('\n', '').strip(),
             weeks = row.find('td', {'class':'weeksColumn'}).text.replace('\n', ''),
+            category='b'
         )
         data.append(obj)
 
     context = {'result': data}
     return render(request, 'base.html', context)
+
+
+
+
