@@ -83,3 +83,20 @@ def commingSoonMovies(request):
     context = {'result': data}
 
     return render(request, 'table.html', context)
+
+
+def popularMovies(request):
+    url = 'https://imdb-api.com/most-popular-movies'
+    page = requests.get(url)
+    soup = BeautifulSoup(page.text, 'html.parser')
+
+    data = ''
+    table = soup.find('table')
+    rows = table.find_all('tr')
+
+    # data.append(table)
+    data += str(table)
+
+    context = {'result': data}
+
+    return render(request, 'table.html', context)
