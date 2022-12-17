@@ -5,6 +5,9 @@ from django.utils.text import slugify
 import requests
 from bs4 import BeautifulSoup
 
+import sys
+sys.setrecursionlimit(7500)
+
 
 def boxOfficeMovies(request):
     url = 'http://www.imdb.com/chart/boxoffice'
@@ -27,8 +30,21 @@ def boxOfficeMovies(request):
         data.append(obj)
 
     context = {'result': data}
-    return render(request, 'base.html', context)
+    return render(request, 'rows.html', context)
 
 
+def top250Movies(request):
+    url = 'https://imdb-api.com/top-250-movies'
+    page = requests.get(url)
+    soup = BeautifulSoup(page.text, 'html.parser')
 
+    data = ''
+    table = soup.find('table')
+    rows = table.find_all('tr')
 
+    # data.append(table)
+    data += str(table)
+
+    context = {'result': data}
+
+    return render(request, 'table.html', context)
