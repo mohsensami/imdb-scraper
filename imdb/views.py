@@ -49,3 +49,20 @@ def top250Movies(request):
     context = {'result': data}
 
     return render(request, 'table.html', context)
+
+
+def boxOfficeAllMovies(request):
+    url = 'https://imdb-api.com/box-office-alltime'
+    page = requests.get(url)
+    soup = BeautifulSoup(page.text, 'html.parser')
+
+    data = ''
+    table = soup.find('table')
+    rows = table.find_all('tr')
+
+    # data.append(table)
+    data += str(table)
+
+    context = {'result': data}
+
+    return render(request, 'table.html', context)
